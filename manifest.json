@@ -1,0 +1,17 @@
+{
+    "name": "Football Apps PWA Sub2",
+    "short_name": "Football Apps PWA Sub2",
+    "description": "Informasi Sepakbola",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#3498DB",
+    "theme_color": "#3498DB",
+    "icons": [
+        {
+            "src": "/img/dicoding.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "gcm_sender_id": "394791122916"
+}
