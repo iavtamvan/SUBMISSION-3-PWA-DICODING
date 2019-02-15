@@ -8,7 +8,7 @@
     "theme_color": "#3498DB",
     "icons": [
         {
-            "src": "/img/ballgi.png",
+            "src": "/img/ball.png",
             "sizes": "512x512",
             "type": "image/png"
         }
