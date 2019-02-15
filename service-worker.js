@@ -1,7 +1,7 @@
 const CACHE_NAME = "football-pwa-2-v1";
 var urlsToCache = [
   "/",
-  "/img/dicoding.png",
+  "/img/ball.png",
   "/img/loading.gif",
   "/index.html",
   "/nav.html",
@@ -57,7 +57,7 @@ self.addEventListener('push', function(event) {
   	}
   	var options = {
 	    body: body,
-	    icon: 'img/dicoding.png',
+	    icon: 'img/ball.png',
 	    vibrate: [100, 50, 100],
 	    data: {
       		dateOfArrival: Date.now(),
