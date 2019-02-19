@@ -24,56 +24,83 @@ workbox.precaching.precacheAndRoute([
 	{ url: '/manifest.json', revision: '1' },
 ]);
 
-const CACHE_NAME = "football-pwa-2-v1";
-var urlsToCache = [
-  "/",
-  "/img/ball.png",
-  "/img/loading.gif",
-  "/index.html",
-  "/nav.html",
-  "/css/materialize.min.css",
-  "/js/materialize.min.js",
-  "/manifest.json",
-  "/js/nav.js",
-  "/js/api.js",
-  "/js/idb.js"
-];
+workbox.routing.registerRoute(
+	new RegExp('^https://api.football-data.org/v2/.*'),
+	workbox.strategies.cacheFirst({
+		plugins: [
+			new workbox.cacheableResponse.Plugin({
+				statuses: [0, 200]
+			}),
+		],
+	})
+);
 
-self.addEventListener("install", function(event) {
-	event.waitUntil(
-		caches.open(CACHE_NAME).then(function(cache) {
-			return cache.addAll(urlsToCache);
-		})
-	);
-});
+workbox.routing.registerRoute(
+	/\.(?:png|gif|jpg|jpeg|svg)$/,
+	workbox.strategies.cacheFirst( {
+		cacheName: 'images',
+		plugins: [
+			new workbox.cacheableResponse.Plugin( {
+				statuses: [0, 200],
+			}),
+			new workbox.expiration.Plugin( {
+				maxAgeSeconds: 60 * 60 * 24 * 365,
+				maxEntries: 100,
+			}),
+		],
+	})
+);
 
-self.addEventListener("fetch", function(event) {
-  event.respondWith(async function () {
-    const cache = await caches.open(CACHE_NAME);
-    const cachedResponse = await cache.match(event.request);
-    if (cachedResponse) return cachedResponse;
-    const networkResponse = await fetch(event.request);
-    event.waitUntil(
-      cache.put(event.request, networkResponse.clone())
-    );
-    return networkResponse;
-  }());
-});
-
-self.addEventListener("activate", function(event) {
-	event.waitUntil(
-		caches.keys().then(function(cacheNames) {
-			return Promise.all(
-				cacheNames.map(function(cacheName) {
-					if (cacheName != CACHE_NAME) {
-						console.log("ServiceWorker: cache " + cacheName + " dihapus");
-						return caches.delete(cacheName);
-					}
-				})
-			);
-		})
-	);
-});
+// const CACHE_NAME = "football-pwa-2-v1";
+// var urlsToCache = [
+//   "/",
+//   "/img/ball.png",
+//   "/img/loading.gif",
+//   "/index.html",
+//   "/nav.html",
+//   "/css/materialize.min.css",
+//   "/js/materialize.min.js",
+//   "/manifest.json",
+//   "/js/nav.js",
+//   "/js/api.js",
+//   "/js/idb.js"
+// ];
+//
+// self.addEventListener("install", function(event) {
+// 	event.waitUntil(
+// 		caches.open(CACHE_NAME).then(function(cache) {
+// 			return cache.addAll(urlsToCache);
+// 		})
+// 	);
+// });
+//
+// self.addEventListener("fetch", function(event) {
+//   event.respondWith(async function () {
+//     const cache = await caches.open(CACHE_NAME);
+//     const cachedResponse = await cache.match(event.request);
+//     if (cachedResponse) return cachedResponse;
+//     const networkResponse = await fetch(event.request);
+//     event.waitUntil(
+//       cache.put(event.request, networkResponse.clone())
+//     );
+//     return networkResponse;
+//   }());
+// });
+//
+// self.addEventListener("activate", function(event) {
+// 	event.waitUntil(
+// 		caches.keys().then(function(cacheNames) {
+// 			return Promise.all(
+// 				cacheNames.map(function(cacheName) {
+// 					if (cacheName != CACHE_NAME) {
+// 						console.log("ServiceWorker: cache " + cacheName + " dihapus");
+// 						return caches.delete(cacheName);
+// 					}
+// 				})
+// 			);
+// 		})
+// 	);
+// });
 
 self.addEventListener('push', function(event) {
 	var body;
