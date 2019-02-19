@@ -7,6 +7,7 @@ var urlsToCache = [
   "/nav.html",
   "/css/materialize.min.css",
   "/js/materialize.min.js",
+  "/manifest.json",
   "/js/nav.js",
   "/js/api.js",
   "/js/idb.js"
