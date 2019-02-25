@@ -19,7 +19,7 @@ workbox.precaching.precacheAndRoute([
 	{ url: '/js/nav.js', revision: '1' },
 	{ url: '/js/api.js', revision: '1' },
 	{ url: '/js/idb.js', revision: '1' },
-	{ url: '/js/dbCrud.js', revision: '1' },
+	{ url: '/js/dbcrud.js', revision: '1' },
 	{ url: '/service-worker.js', revision: '1' },
 	{ url: '/manifest.json', revision: '1' },
 ]);
