@@ -11,6 +11,12 @@ workbox.clientsClaim();
 workbox.precaching.precacheAndRoute([
 	{ url: '/', revision: '1' },
 	{ url: '/img/ball.png', revision: '1' },
+	{ url: '/img/48x48.png', revision: '1' },
+	{ url: '/img/72x72.png', revision: '1' },
+	{ url: '/img/96x96.png', revision: '1' },
+	{ url: '/img/144x144.png', revision: '1' },
+	{ url: '/img/148x148.png', revision: '1' },
+	{ url: '/img/512x512.png', revision: '1' },
 	{ url: '/img/loading.gif', revision: '1' },
 	{ url: '/index.html', revision: '1' },
 	{ url: '/nav.html', revision: '1' },
