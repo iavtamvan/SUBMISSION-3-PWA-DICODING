@@ -35,6 +35,6 @@
     "watchify": "^3.3.1"
   },
   "dependencies": {
-    "web-push": "^3.3.3"
+    "web-push": "^3.4.4"
   }
 }
